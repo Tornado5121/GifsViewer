@@ -12,11 +12,4 @@ val fragmentModule = module {
     factory { Glide.with(androidContext()) }
     factory<ImageLoader> { GlideImageLoader(get()) }
     factory { (onClick: (Gif) -> Unit) -> GifsAdapter(get(), onClick) }
-//    single {
-//        LinearLayoutManager(
-//            androidContext(),
-//            LinearLayoutManager.VERTICAL,
-//            false
-//        )
-//    }
 }

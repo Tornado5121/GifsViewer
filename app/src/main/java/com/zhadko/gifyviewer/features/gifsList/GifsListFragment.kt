@@ -12,7 +12,7 @@ import com.zhadko.gifyviewer.base.BaseFragment
 import com.zhadko.gifyviewer.databinding.FragmentGifsListBinding
 import com.zhadko.gifyviewer.domain.models.Gif
 import com.zhadko.gifyviewer.extensions.collectOnLifeCycle
-import com.zhadko.gifyviewer.extensions.showDialog
+import com.zhadko.gifyviewer.extensions.showDialogWithButton
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -91,7 +91,7 @@ class GifsListFragment : BaseFragment<FragmentGifsListBinding>(FragmentGifsListB
             noData.isVisible = false
             gifsList.isVisible = false
             Log.e("GIF_ERROR", pair.second)
-            showDialog(
+            showDialogWithButton(
                 title = "Error",
                 message = pair.first,
                 buttonTitle = "Try again"
