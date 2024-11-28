@@ -26,8 +26,6 @@ class GifsListFragment : BaseFragment<FragmentGifsListBinding>(FragmentGifsListB
         )
     }
 
-//    private val layoutManager: LinearLayoutManager by inject()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupView()
