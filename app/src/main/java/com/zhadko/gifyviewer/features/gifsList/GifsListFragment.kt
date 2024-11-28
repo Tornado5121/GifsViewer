@@ -13,17 +13,15 @@ import com.zhadko.gifyviewer.databinding.FragmentGifsListBinding
 import com.zhadko.gifyviewer.domain.models.Gif
 import com.zhadko.gifyviewer.extensions.collectOnLifeCycle
 import com.zhadko.gifyviewer.extensions.showDialogWithButton
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class GifsListFragment : BaseFragment<FragmentGifsListBinding>(FragmentGifsListBinding::inflate) {
 
     private val viewModel by viewModel<GifsListViewModel>()
-    private val gifsAdapter by inject<GifsAdapter> {
-        parametersOf(
-            ::navigateDetails
-        )
+    private val gifsAdapter by lazy {
+        GifsAdapter { gif ->
+            navigateDetails(gif)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
