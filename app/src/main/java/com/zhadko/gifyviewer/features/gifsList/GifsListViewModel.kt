@@ -1,22 +1,16 @@
 package com.zhadko.gifyviewer.features.gifsList
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zhadko.gifyviewer.base.BaseViewModel
 import com.zhadko.gifyviewer.data.network.models.asGifList
-import com.zhadko.gifyviewer.domain.repository.IGifsRepository
 import com.zhadko.gifyviewer.domain.models.Gif
 import com.zhadko.gifyviewer.domain.models.GifsListResult
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import com.zhadko.gifyviewer.domain.repository.IGifsRepository
 import kotlinx.coroutines.launch
 
 class GifsListViewModel(
-    private val gifRepository: IGifsRepository
-) : ViewModel() {
-
-    private val _state = MutableStateFlow<GifListStates>(GifListStates.Loading)
-    val state = _state.asStateFlow()
+    private val gifRepository: IGifsRepository,
+) : BaseViewModel<GifListStates>() {
 
     private var gifsList = listOf<Gif>()
 
@@ -24,10 +18,12 @@ class GifsListViewModel(
         getGifsList()
     }
 
+    override fun initialState(): GifListStates = GifListStates.Loading
+
     fun getGifsList() {
         viewModelScope.launch {
-            _state.update { GifListStates.Loading }
-            _state.update {
+            updateState(GifListStates.Loading)
+            updateState(
                 when (val gifsResult = gifRepository.getGifsList()) {
                     GifsListResult.EmptyResult -> {
                         GifListStates.EmptyGifsList
@@ -41,8 +37,9 @@ class GifsListViewModel(
                         )
                     }
                 }
-            }
+            )
         }
     }
+
 
 }
