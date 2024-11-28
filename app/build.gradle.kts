@@ -69,4 +69,7 @@ dependencies {
     //Retrofit
     implementation(libs.converter.gson)
     implementation(libs.retrofit)
+
+    //Pager3
+    implementation(libs.paging.runtime)
 }
