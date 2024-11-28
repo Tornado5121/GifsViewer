@@ -5,7 +5,7 @@ import com.zhadko.gifyviewer.data.dataSources.GifsFetcher
 import com.zhadko.gifyviewer.data.dataSources.GifsFetcherImpl
 import com.zhadko.gifyviewer.data.network.GifsApi
 import com.zhadko.gifyviewer.data.repository.GifsRepositoryImpl
-import com.zhadko.gifyviewer.domain.iRepository.IGifsRepository
+import com.zhadko.gifyviewer.domain.repository.IGifsRepository
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

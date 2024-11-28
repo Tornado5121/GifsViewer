@@ -2,7 +2,7 @@ package com.zhadko.gifyviewer.data.repository
 
 import com.zhadko.gifyviewer.data.dataSources.GifsFetcher
 import com.zhadko.gifyviewer.data.network.models.NetworkResult
-import com.zhadko.gifyviewer.domain.iRepository.IGifsRepository
+import com.zhadko.gifyviewer.domain.repository.IGifsRepository
 import com.zhadko.gifyviewer.domain.models.GifsListResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

@@ -3,7 +3,7 @@ package com.zhadko.gifyviewer.features.gifsList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zhadko.gifyviewer.data.network.models.asGifList
-import com.zhadko.gifyviewer.domain.iRepository.IGifsRepository
+import com.zhadko.gifyviewer.domain.repository.IGifsRepository
 import com.zhadko.gifyviewer.domain.models.Gif
 import com.zhadko.gifyviewer.domain.models.GifsListResult
 import kotlinx.coroutines.flow.MutableStateFlow

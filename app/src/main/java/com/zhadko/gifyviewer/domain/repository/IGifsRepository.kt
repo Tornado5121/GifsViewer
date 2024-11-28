@@ -1,4 +1,4 @@
-package com.zhadko.gifyviewer.domain.iRepository
+package com.zhadko.gifyviewer.domain.repository
 
 import com.zhadko.gifyviewer.domain.models.GifsListResult
 
