@@ -34,9 +34,7 @@ class GifsListFragment : BaseFragment<FragmentGifsListBinding>(FragmentGifsListB
         with(binding) {
             gifsList.adapter = gifsAdapter
             val manager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.VERTICAL,
-                false
+                requireContext()
             )
             gifsList.layoutManager = manager
             setPagination(manager)
