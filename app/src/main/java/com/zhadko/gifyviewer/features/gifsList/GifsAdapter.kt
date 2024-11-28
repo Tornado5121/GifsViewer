@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.zhadko.gifyviewer.R
-import com.zhadko.gifyviewer.common.ImageLoader
 import com.zhadko.gifyviewer.databinding.ItemGifBinding
 import com.zhadko.gifyviewer.domain.models.Gif
+import com.zhadko.gifyviewer.extensions.loadAsGif
 
 class GifsAdapter(
-    private val imageLoader: ImageLoader,
     private val onClick: (Gif) -> Unit,
 ) : ListAdapter<Gif,
         GifsAdapter.ItemViewHolder>(ItemDiffUtilCallback()) {
@@ -21,16 +21,17 @@ class GifsAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bind(currentList[position], imageLoader, onClick)
+        holder.bind(currentList[position], onClick)
     }
 
     class ItemViewHolder(private val binding: ItemGifBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: Gif, imageLoader: ImageLoader, click: (Gif) -> Unit) {
+        fun bind(data: Gif, click: (Gif) -> Unit) {
             with(binding) {
                 gifTitleView.text = data.title
-                imageLoader.loadAsGif(data.path, gifsView, R.drawable.ic_launcher_background)
+                Glide.with(binding.root)
+                    .loadAsGif(data.path, gifsView, R.drawable.ic_launcher_background)
                 root.setOnClickListener {
                     click(data)
                 }
