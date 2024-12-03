@@ -1,7 +1,7 @@
 package com.zhadko.gifyviewer.data.repository
 
 import com.zhadko.gifyviewer.data.network.GifsApi
-import com.zhadko.gifyviewer.data.network.models.asGifList
+import com.zhadko.gifyviewer.domain.mappers.asGifList
 import com.zhadko.gifyviewer.domain.models.Gif
 import com.zhadko.gifyviewer.domain.repository.GifsRepository
 
