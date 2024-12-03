@@ -2,8 +2,8 @@ package com.zhadko.gifyviewer.features.gifsList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zhadko.gifyviewer.R
@@ -13,7 +13,7 @@ import com.zhadko.gifyviewer.extensions.loadAsGif
 
 class GifsAdapter(
     private val onClick: (Gif) -> Unit,
-) : ListAdapter<Gif,
+) : PagingDataAdapter<Gif,
         GifsAdapter.ItemViewHolder>(ItemDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -21,7 +21,10 @@ class GifsAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bind(currentList[position], onClick)
+        val gif = getItem(position)
+        if (gif != null) {
+            holder.bind(gif, onClick)
+        }
     }
 
     class ItemViewHolder(private val binding: ItemGifBinding) :

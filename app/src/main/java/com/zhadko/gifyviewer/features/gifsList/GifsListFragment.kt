@@ -1,18 +1,19 @@
 package com.zhadko.gifyviewer.features.gifsList
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.zhadko.gifyviewer.base.BaseFragment
 import com.zhadko.gifyviewer.databinding.FragmentGifsListBinding
 import com.zhadko.gifyviewer.domain.models.Gif
 import com.zhadko.gifyviewer.extensions.collectOnLifeCycle
-import com.zhadko.gifyviewer.extensions.showDialogWithButton
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GifsListFragment : BaseFragment<FragmentGifsListBinding>(FragmentGifsListBinding::inflate) {
@@ -37,20 +38,21 @@ class GifsListFragment : BaseFragment<FragmentGifsListBinding>(FragmentGifsListB
                 requireContext()
             )
             gifsList.layoutManager = manager
-            setPagination(manager)
         }
     }
 
     private fun setupObservers() {
         collectOnLifeCycle(viewModel.state, ::handleStateScreen)
+        collectOnLifeCycle(viewModel.items, ::handleSuccess)
     }
 
     private fun handleStateScreen(state: GifListStates) {
         when (state) {
             GifListStates.EmptyGifsList -> handleEmptyGifsList()
-            is GifListStates.Error -> handleErrorState(state.pair)
-            is GifListStates.GifsList -> handleSuccess(state.result)
+            is GifListStates.Error -> {}
+//                handleErrorState(state.pair)
             GifListStates.Loading -> handleLoadingState()
+            else -> {}
         }
     }
 
@@ -70,44 +72,34 @@ class GifsListFragment : BaseFragment<FragmentGifsListBinding>(FragmentGifsListB
         }
     }
 
-    private fun handleSuccess(gifsListData: List<Gif>) {
+    private fun handleSuccess(gifsListData: PagingData<Gif>) {
         with(binding) {
             progressBar.isVisible = false
             noData.isVisible = false
             gifsList.isVisible = true
-            gifsAdapter.submitList(gifsListData)
-        }
-    }
-
-    private fun handleErrorState(pair: Pair<String, String>) {
-        with(binding) {
-            progressBar.isVisible = false
-            noData.isVisible = false
-            gifsList.isVisible = false
-            Log.e("GIF_ERROR", pair.second)
-            showDialogWithButton(
-                title = "Error",
-                message = pair.first,
-                buttonTitle = "Try again"
-            ) {
-                viewModel.getGifsList()
-            }
-        }
-    }
-
-    private fun setPagination(manager: LinearLayoutManager) {
-        binding.gifsList.addOnScrollListener(object : OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                val currentItems = manager.childCount
-                val totalItems = manager.itemCount
-                val scrollOutItems = manager.findFirstVisibleItemPosition()
-                if (currentItems + scrollOutItems == totalItems) {
-                    viewModel.getGifsList()
+            lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    gifsAdapter.submitData(gifsListData)
                 }
             }
-        })
+        }
     }
+
+//    private fun handleErrorState(pair: Pair<String, String>) {
+//        with(binding) {
+//            progressBar.isVisible = false
+//            noData.isVisible = false
+//            gifsList.isVisible = false
+//            Log.e("GIF_ERROR", pair.second)
+//            showDialogWithButton(
+//                title = "Error",
+//                message = pair.first,
+//                buttonTitle = "Try again"
+//            ) {
+//                viewModel.getGifsList()
+//            }
+//        }
+//    }
 
     private fun navigateDetails(gif: Gif) {
         findNavController().navigate(

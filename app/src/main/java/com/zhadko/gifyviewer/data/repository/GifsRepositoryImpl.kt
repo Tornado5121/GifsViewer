@@ -1,33 +1,23 @@
 package com.zhadko.gifyviewer.data.repository
 
-import com.zhadko.gifyviewer.data.dataSources.GifsFetcher
-import com.zhadko.gifyviewer.data.network.models.NetworkResult
+import com.zhadko.gifyviewer.data.network.GifsApi
+import com.zhadko.gifyviewer.data.network.models.asGifList
+import com.zhadko.gifyviewer.domain.models.Gif
 import com.zhadko.gifyviewer.domain.repository.IGifsRepository
-import com.zhadko.gifyviewer.domain.models.GifsListResult
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class GifsRepositoryImpl(
-    private val gifsFetcher: GifsFetcher
+    private val gifsApi: GifsApi,
 ) : IGifsRepository {
 
-    override suspend fun getGifsList(): GifsListResult {
-        return withContext(Dispatchers.IO) {
-            when (val result = gifsFetcher.getGifsFromRemote()) {
-                is NetworkResult.Error -> GifsListResult.Error(result.pair)
-                is NetworkResult.Success -> {
-                    if (result.data.data.isNotEmpty()) {
-                        GifsListResult.NotEmptyResult(result.data.data)
-                    } else {
-                        GifsListResult.EmptyResult
-                    }
-                }
-
-                null -> GifsListResult.Error(
-                    "Something went wrong, try again, please" to
-                            "Something happen on GifsRepository "
-                )
-            }
+    override suspend fun getGifsList(
+        offset: Int,
+        limit: Int,
+    ): List<Gif> {
+        val response = gifsApi.getGifsResponse(offset = offset, limit = limit)
+        return if (response.isSuccessful) {
+            response.body()?.data?.asGifList() ?: emptyList()
+        } else {
+            throw Exception()
         }
     }
 }
