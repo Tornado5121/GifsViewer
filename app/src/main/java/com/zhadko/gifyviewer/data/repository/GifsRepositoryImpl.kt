@@ -3,11 +3,11 @@ package com.zhadko.gifyviewer.data.repository
 import com.zhadko.gifyviewer.data.network.GifsApi
 import com.zhadko.gifyviewer.data.network.models.asGifList
 import com.zhadko.gifyviewer.domain.models.Gif
-import com.zhadko.gifyviewer.domain.repository.IGifsRepository
+import com.zhadko.gifyviewer.domain.repository.GifsRepository
 
 class GifsRepositoryImpl(
     private val gifsApi: GifsApi,
-) : IGifsRepository {
+) : GifsRepository {
 
     override suspend fun getGifsList(
         offset: Int,

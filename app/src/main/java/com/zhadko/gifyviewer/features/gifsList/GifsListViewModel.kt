@@ -5,10 +5,10 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.zhadko.gifyviewer.base.BaseViewModel
-import com.zhadko.gifyviewer.domain.repository.IGifsRepository
+import com.zhadko.gifyviewer.domain.repository.GifsRepository
 
 class GifsListViewModel(
-    private val gifRepository: IGifsRepository,
+    private val gifRepository: GifsRepository,
 ) : BaseViewModel<GifListStates>() {
 
     override fun initialState(): GifListStates = GifListStates.Loading

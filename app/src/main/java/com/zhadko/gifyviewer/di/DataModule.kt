@@ -3,7 +3,7 @@ package com.zhadko.gifyviewer.di
 import com.zhadko.gifyviewer.BuildConfig
 import com.zhadko.gifyviewer.data.network.GifsApi
 import com.zhadko.gifyviewer.data.repository.GifsRepositoryImpl
-import com.zhadko.gifyviewer.domain.repository.IGifsRepository
+import com.zhadko.gifyviewer.domain.repository.GifsRepository
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,5 +16,5 @@ val dataModule = module {
             .build().create(GifsApi::class.java)
     }
 
-    factory<IGifsRepository> { GifsRepositoryImpl(get()) }
+    factory<GifsRepository> { GifsRepositoryImpl(get()) }
 }

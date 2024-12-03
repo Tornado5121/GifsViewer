@@ -3,13 +3,13 @@ package com.zhadko.gifyviewer.features.gifsList
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.zhadko.gifyviewer.domain.models.Gif
-import com.zhadko.gifyviewer.domain.repository.IGifsRepository
+import com.zhadko.gifyviewer.domain.repository.GifsRepository
 
 private const val GITHUB_STARTING_PAGE_INDEX = 0
 const val NETWORK_PAGE_SIZE = 10
 
 class GifsListPagingDataSource(
-    private val gifsRepository: IGifsRepository,
+    private val gifsRepository: GifsRepository,
 ) : PagingSource<Int, Gif>() {
 
     override fun getRefreshKey(state: PagingState<Int, Gif>): Int? {
