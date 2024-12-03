@@ -50,9 +50,7 @@ class GifsListFragment : BaseFragment<FragmentGifsListBinding>(FragmentGifsListB
         when (state) {
             GifListStates.EmptyGifsList -> handleEmptyGifsList()
             is GifListStates.Error -> {}
-//                handleErrorState(state.pair)
             GifListStates.Loading -> handleLoadingState()
-            else -> {}
         }
     }
 
