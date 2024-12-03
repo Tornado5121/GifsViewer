@@ -15,5 +15,4 @@ class MainActivity : AppCompatActivity() {
     private fun setStatusBarTransparent() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
     }
-
 }
