@@ -1,8 +1,6 @@
 package com.zhadko.gifyviewer.di
 
 import com.zhadko.gifyviewer.BuildConfig
-import com.zhadko.gifyviewer.data.dataSources.GifsFetcher
-import com.zhadko.gifyviewer.data.dataSources.GifsFetcherImpl
 import com.zhadko.gifyviewer.data.network.GifsApi
 import com.zhadko.gifyviewer.data.repository.GifsRepositoryImpl
 import com.zhadko.gifyviewer.domain.repository.IGifsRepository
@@ -18,6 +16,5 @@ val dataModule = module {
             .build().create(GifsApi::class.java)
     }
 
-    factory<GifsFetcher> { GifsFetcherImpl(get()) }
     factory<IGifsRepository> { GifsRepositoryImpl(get()) }
 }
