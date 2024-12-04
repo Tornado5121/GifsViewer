@@ -7,9 +7,12 @@ fun Fragment.showDialogWithButton(
     title: String,
     message: String = "",
     buttonTitle: String,
-    action: () -> Unit
+    action: () -> Unit,
 ) {
-    AlertDialog.Builder(requireContext()).setTitle(title).setMessage(message)
+    AlertDialog.Builder(requireContext())
+        .setTitle(title)
+        .setMessage(message)
+        .setCancelable(false)
         .setPositiveButton(buttonTitle) { dialog, _ ->
             action()
             dialog.dismiss()
