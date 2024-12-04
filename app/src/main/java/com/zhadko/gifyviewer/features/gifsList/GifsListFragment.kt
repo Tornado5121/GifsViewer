@@ -102,7 +102,7 @@ class GifsListFragment : BaseFragment<FragmentGifsListBinding>(FragmentGifsListB
             progressBar.isVisible = false
             noData.isVisible = false
             gifsList.isVisible = false
-            Log.e("GIF_ERROR", throwable.cause?.message.toString())
+            Log.e(GIF_ERROR, throwable.cause?.message.toString())
             showDialogWithButton(
                 title = getString(R.string.error),
                 message = throwable.message.toString(),
@@ -121,5 +121,9 @@ class GifsListFragment : BaseFragment<FragmentGifsListBinding>(FragmentGifsListB
                 gif
             )
         )
+    }
+
+    companion object {
+        const val GIF_ERROR = "GIF_ERROR"
     }
 }
