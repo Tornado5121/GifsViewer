@@ -5,7 +5,7 @@ import androidx.paging.PagingState
 import com.zhadko.gifyviewer.domain.models.Gif
 import com.zhadko.gifyviewer.domain.repository.GifsRepository
 
-private const val GITHUB_STARTING_PAGE_INDEX = 0
+private const val START_POSITION = 0
 const val NETWORK_PAGE_SIZE = 10
 
 class GifsListPagingDataSource(
@@ -17,7 +17,7 @@ class GifsListPagingDataSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Gif> {
-        val position = params.key ?: GITHUB_STARTING_PAGE_INDEX
+        val position = params.key ?: START_POSITION
         return try {
             val response = gifsRepository.getGifsList(
                 offset = position,
