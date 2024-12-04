@@ -3,4 +3,6 @@
     <string name="gifimage">gifImage</string>
     <string name="gifview">gifView</string>
     <string name="there_is_no_any_data_for_display">There is no any data for display</string>
+    <string name="error">Error</string>
+    <string name="try_again">Try again</string>
 </resources>

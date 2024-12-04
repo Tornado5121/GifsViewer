@@ -12,6 +12,7 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.zhadko.gifyviewer.R
 import com.zhadko.gifyviewer.base.BaseFragment
 import com.zhadko.gifyviewer.databinding.FragmentGifsListBinding
 import com.zhadko.gifyviewer.domain.models.Gif
@@ -103,9 +104,9 @@ class GifsListFragment : BaseFragment<FragmentGifsListBinding>(FragmentGifsListB
             gifsList.isVisible = false
             Log.e("GIF_ERROR", throwable.cause?.message.toString())
             showDialogWithButton(
-                title = "Error",
+                title = getString(R.string.error),
                 message = throwable.message.toString(),
-                buttonTitle = "Try again",
+                buttonTitle = getString(R.string.try_again),
                 action = {
                     gifsAdapter.refresh()
                 }
