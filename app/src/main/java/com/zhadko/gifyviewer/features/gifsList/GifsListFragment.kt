@@ -114,7 +114,6 @@ class GifsListFragment : BaseFragment<FragmentGifsListBinding>(FragmentGifsListB
         }
     }
 
-
     private fun navigateDetails(gif: Gif) {
         findNavController().navigate(
             GifsListFragmentDirections.actionGifsListFragmentToGifDetailedFragment(
