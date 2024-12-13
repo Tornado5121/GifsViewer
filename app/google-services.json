@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1082866775702",
+    "project_id": "gifyviewer",
+    "storage_bucket": "gifyviewer.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082866775702:android:d0bb17f81b71cf262b74b7",
+        "android_client_info": {
+          "package_name": "com.zhadko.gifyviewer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8JxXOZ_E6FDBCPslnigrmGy7qUWdCR6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
